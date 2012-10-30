@@ -8,7 +8,21 @@
 
 \begin{document}
 
-\maketitle
+
+\section{Постановка задачи}
+\subsection{Стационарные уравнения Стокса}
+\subsection{Конечные элементы}
+
+\section{Решение}
+\subsection{<<Точное>> решение}
+\subsection{Функция тока}
+\subsection{Сравниваемые свойства элементов}
+\subsection{Программа}
+
+\section{Результаты}
+\subsection{Графики}
+\subsection{Выводы}
+
 \section{Конечно-элементные вычисления.}
 \subsection{Обзор конечных элементов для стационарного уравнения Стокса.}
 В этом разделе мы сравниваем решения уравнений Стокса полученные с помощью различных конечных элементов.
@@ -62,7 +76,7 @@ u = (0, 0) \quad \partial\Omega_{w},
 где $\partial\Omega_{t}$ - верхняя стенка, $\partial\Omega_{w}$ - обе боковые и нижняя стенка. В постановке будем считать что две верхние угловые точки принадлежат неподвижной области $\partial\Omega_{w}$. Область представляет собой единичный квадрат, и скорость движения по $x$ верхней границы тоже $1$. Расчет проводится в безразмерных величинах, хотя можно считать сторону квадрата 1 м, и скорость стенки 1 м/с.
 
 \begin{figure}
-\includegraphics[scale=0.5]{stokes-test/cavity}
+\includegraphics[scale=0.5]{pics/cavity}
 \caption{Тестовая область с подвижной верхней границей.}
 \label{fg:cavity}
 \end{figure}
@@ -118,39 +132,30 @@ TODO:
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.4]{stokes-test/pressure}
+\includegraphics[scale=0.4]{pics/pressure}
 \caption{Поле давления.}
 \label{fg:pressure}
 \end{center}
 \end{figure}
 
 \begin{figure}
-\includegraphics[scale=0.1]{stokes-test/velocity}
+\includegraphics[scale=0.1]{pics/velocity}
 \caption{Поле скоростей.}
 \label{fg:velocity}
 \end{figure}
 
 \begin{center}
   \begin{figure}
-    \includegraphics[scale=0.4]{stokes-test/psi}
+    \includegraphics[scale=0.4]{pics/psi}
     \caption{Поле функции тока.}
     \label{fg:psi}
   \end{figure}
 \end{center}
 
 \begin{figure}
-\includegraphics[scale=0.1]{stokes-test/time}
+\includegraphics[scale=0.1]{pics/time}
 \caption{Зависимость времени решения от кол-ва ячеек.}
 \label{fg:time}
 \end{figure}
-
-\subsection{Схемы расщепления.}
-\subsection{Аппроксимация конвективного слагаемого для уравнения Навье-Стокса.}
-
-\section{Осесимметричная задача моделирования несущей конструкции.}
-\subsection{}
-
-\section{Трехмерное моделирование несущей конструкции.}
-\subsection{}
 
 \end{document}
