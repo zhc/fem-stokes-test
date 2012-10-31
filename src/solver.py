@@ -14,55 +14,6 @@ def create_space(element, mesh):
     W = U*P
     return W
     
-def solve_square(mesh, space):
-    print "solve square"
-    def domain_all(x, on_boundary):
-        return on_boundary
-    bc0 = DirichletBC(space.sub(0), Expression(main.uu), domain_all)
-    bcs = [bc0]
-    
-    (u, p) = TrialFunctions(space)
-    (v, q) = TestFunctions(space)
-    f = Expression(main.ff)       
-    a = inner(grad(u), grad(v))*dx - p*div(v)*dx + div(u)*q*dx
-    L = inner(f, v)*dx
-    
-    t = Timer("Solve timing");
-    t.start()
-            
-    U = Function(space)
-    problem = LinearVariationalProblem(a, L, U, bcs=bcs)
-    solver = LinearVariationalSolver(problem)
-    solver.solve()
-    
-    t.stop()
-    
-    (u, p) = U.split(True)
-    
-    # correct pressure field sum equals 0
-    c = assemble(p*dx)
-    vec = p.vector()
-    for i in range(vec.size()):
-        vec[i] -= c
-                
-    return u, p, t.value()
-    
-def solve_square_ex(mesh):
-    print "solve square exact"
-    VP10 = VectorFunctionSpace(mesh, "CG", 10)
-    P10 = FunctionSpace(mesh, "CG", 10)
-    u_ex = Expression(main.uu, element=VP10.ufl_element())
-    p_ex = Expression(main.pp, element=P10.ufl_element())
-    return u_ex, p_ex
-
-def compare_square(u, p, u_ex, p_ex, mesh):
-    print "compare square"
-    M = inner((u_ex - u),(u_ex - u))*dx
-    v_err = assemble(M, mesh=mesh)    
-    Mp = (p_ex - p)*(p_ex - p)*dx
-    p_err = assemble(Mp, mesh=mesh)
-    return v_err, p_err
-    
 def solve_cavity(mesh, space):
     print "solve cavity"
     def domain_top(x, on_boundary):
@@ -85,6 +36,14 @@ def solve_cavity(mesh, space):
     solver.solve()    
     t.stop()    
     (u, p) = U.split(True)    
+    
+    # correct pressure
+    c = assemble(p*dx)
+    vec = p.vector()
+    for i in range(vec.size()):
+        vec[i] -= c
+                
+    
     return u, p, t.value()
 
 
@@ -106,3 +65,12 @@ def solve_cavity_psi(mesh, space, u):
     solver = LinearVariationalSolver(problem)
     solver.solve()
     return PSI
+
+def solve_cavity_error(u, p, psi, u_ex, p_ex, psi_ex, mesh_ex):
+    M = inner((u_ex - u),(u_ex - u))*dx
+    v_err = assemble(M, mesh=mesh_ex)    
+    Mp = (p_ex - p)*(p_ex - p)*dx
+    p_err = assemble(Mp, mesh=mesh_ex)
+    Mps = (psi_ex - psi)*(psi_ex - psi)*dx
+    psi_err = assemble(Mps, mesh=mesh_ex)
+    return (v_err, p_err, psi_err)
