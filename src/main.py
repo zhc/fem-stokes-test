@@ -6,6 +6,7 @@ elements_table = {
     "CD": ("Lagrange", 2, "Discontinuous Lagrange", 0),    
     "TH": ("Lagrange", 2, "Lagrange", 1),
     
+
 #    "TH1": ("Lagrange", 1, "Lagrange", 1), # doesnt work
 #    "TH2": ("Lagrange", 2, "Lagrange", 2), # strange solution, form like eight
 #    "TH3": ("Lagrange", 3, "Lagrange", 2), # like a normal solution 
