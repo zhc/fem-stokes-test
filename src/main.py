@@ -1,5 +1,6 @@
 from plotter import *
 from solver import *
+import shutil
 
 elements_table = {
     "CR": ("Crouzeix-Raviart", 1, "Discontinuous Lagrange", 0),    
@@ -20,9 +21,9 @@ elements_table = {
 #    "CD3": ("Lagrange", 1, "Discontinuous Lagrange", 1), # doesnt work     
 #    "CD4": ("Lagrange", 3, "Discontinuous Lagrange", 0), # like a normal solution, not sure     
     }
-hmin = 20
+hmin = 25
 hmax = 150
-hstep = 10
+hstep = 5
 h_ex = 200
 
 times = {}
@@ -35,9 +36,9 @@ def save_pvd(name, data):
     f << data    
     
 def save_pvd_list(u, p, psi, name, h):    
-    save_pvd("result_velocity_%s_%d" % (name, h), u)
-    save_pvd("result_pressure_%s_%d" % (name, h), p)
-    save_pvd("result_psi_%s_%d" % (name, h), psi)
+    save_pvd("result/pvd/velocity_%s_%d" % (name, h), u)
+    save_pvd("result/pvd/pressure_%s_%d" % (name, h), p)
+    save_pvd("result/pvd/psi_%s_%d" % (name, h), psi)
 
 def save_time(name, h, time):    
     if h not in times:
@@ -61,7 +62,7 @@ def save_psi_err(name, h, psi_err):
     
 
 def save_dat_aggr(fname, times):    
-    ft = open("result_%s.dat" % fname, "w")
+    ft = open("result/dat2/%s.dat" % fname, "w")
     
     arr_h = range(hmin, hmax+1, hstep)
     arr_n = []
@@ -78,6 +79,15 @@ def save_dat_aggr(fname, times):
             ft.write("%.9f " % (times[h][name]))
         ft.write("\n")
     ft.close()
+
+def init_result():
+    if os.path.exists("result"):
+        shutil.rmtree("result")
+    os.mkdir("result")
+    os.mkdir("result/dat")
+    os.mkdir("result/dat2")
+    os.mkdir("result/pvd")
+    os.mkdir("result/slice")
     
 def save_result():    
     save_dat_aggr("time", times)
@@ -87,9 +97,9 @@ def save_result():
     
 def save_dat(u, p, psi, name, h, mesh):
     coords = mesh.coordinates()    
-    fu = open("result_velocity_%s_%d.dat" % (name, h), "w")
-    fp = open("result_pressure_%s_%d.dat" % (name, h), "w")
-    fps = open("result_psi_%s_%d.dat" % (name, h), "w")
+    fu = open("result/dat/velocity_%s_%d.dat" % (name, h), "w")
+    fp = open("result/dat/pressure_%s_%d.dat" % (name, h), "w")
+    fps = open("result/dat/psi_%s_%d.dat" % (name, h), "w")
     fu.write("# x y ux uy\n")
     fp.write("# x y p\n")
     fps.write("# x y psi\n")
@@ -109,6 +119,45 @@ def save_dat(u, p, psi, name, h, mesh):
     fu.close()
     fp.close()
     fps.close()
+    
+def save_dat_slice_x(u, p, psi, name, h, mesh, x=0.5):
+    coords = mesh.coordinates()    
+    fu = open("result/slice/velocity_%s_%d_x%.1f.dat" % (name, h, x), "w")
+    fp = open("result/slice/pressure_%s_%d_x%.1f.dat" % (name, h, x), "w")
+    fps = open("result/slice/psi_%s_%d_x%.1f.dat" % (name, h,x ), "w")
+    fu.write("# y ux uy\n")
+    fp.write("# y p\n")
+    fps.write("# y psi\n")   
+    for i in coords:
+        if i[0] == x:                
+            yu = u(i)
+            yp = p(i)
+            yps = psi(i)
+            fu.write("%.9f %.9f %.9f\n" % (i[1], yu[0], yu[1] ))
+            fp.write("%.9f %.9f\n" % (i[1], yp ))
+            fps.write("%.9f %.9f\n" % (i[1], yps ))       
+    fu.close()
+    fp.close()
+    fps.close()
+def save_dat_slice_y(u, p, psi, name, h, mesh, y=0.5):
+    coords = mesh.coordinates()    
+    fu = open("result/slice/velocity_%s_%d_y%.1f.dat" % (name, h, y), "w")
+    fp = open("result/slice/pressure_%s_%d_y%.1f.dat" % (name, h, y), "w")
+    fps = open("result/slice/psi_%s_%d_y%.1f.dat" % (name, h, y), "w")
+    fu.write("# x ux uy\n")
+    fp.write("# x p\n")
+    fps.write("# x psi\n")   
+    for i in coords:
+        if i[1] == y:                
+            yu = u(i)
+            yp = p(i)
+            yps = psi(i)
+            fu.write("%.9f %.9f %.9f\n" % (i[0], yu[0], yu[1] ))
+            fp.write("%.9f %.9f\n" % (i[0], yp ))
+            fps.write("%.9f %.9f\n" % (i[0], yps ))       
+    fu.close()
+    fp.close()
+    fps.close()
 
 if __name__ == "__main__":
     init_result()
@@ -118,6 +167,16 @@ if __name__ == "__main__":
     (psi_ex) = solve_cavity_psi(mesh_ex, space_ex, u_ex)
     save_pvd_list(u_ex, p_ex, psi_ex, "TH", h_ex)
     save_dat(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.5)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.4)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.2)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.3)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.1)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.5)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.4)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.2)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.3)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.1)
     h = hmin
     while(h<=hmax):
         mesh = create_mesh(h)            
@@ -131,6 +190,16 @@ if __name__ == "__main__":
             save_u_err(element, h, u_err)
             save_p_err(element, h, p_err)
             save_psi_err(element, h, psi_err)
-            save_dat(u, p, psi, element, h, mesh_ex) 
+            save_dat(u, p, psi, element, h, mesh_ex)
+            save_dat_slice_x(u, p, psi, element, h, mesh_ex, 0.1)
+            save_dat_slice_x(u, p, psi, element, h, mesh_ex, 0.2)
+            save_dat_slice_x(u, p, psi, element, h, mesh_ex, 0.3)
+            save_dat_slice_x(u, p, psi, element, h, mesh_ex, 0.4)
+            save_dat_slice_x(u, p, psi, element, h, mesh_ex, 0.5)
+            save_dat_slice_y(u, p, psi, element, h, mesh_ex, 0.1)
+            save_dat_slice_y(u, p, psi, element, h, mesh_ex, 0.2)
+            save_dat_slice_y(u, p, psi, element, h, mesh_ex, 0.3)
+            save_dat_slice_y(u, p, psi, element, h, mesh_ex, 0.4)
+            save_dat_slice_y(u, p, psi, element, h, mesh_ex, 0.5)
         h+=hstep
     save_result()

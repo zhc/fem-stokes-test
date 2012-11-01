@@ -10,11 +10,6 @@ square_err_collector = []
 
 psi_collector = []
 
-def init_result():
-    #delete all "result_*" files
-    filelist = [ f for f in os.listdir(".") if f.startswith("result_") ]
-    for f in filelist:
-        os.remove(f)  
         
              
 #def collect_u_p_result(element, h, u, p, time, mesh, task_name):
