@@ -7,7 +7,7 @@ filename(quantity, element, h, slice)=sprintf('result/slice/%s_%s_%d_%s.dat', qu
 
 set multiplot layout 2, 2
 
-slice = 'y0.5'
+slice = 'x0.5'
 quantity= 'psi'
 
 plot \
