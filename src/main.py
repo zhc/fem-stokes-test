@@ -1,6 +1,6 @@
-from plotter import *
 from solver import *
 import shutil
+import os
 
 elements_table = {
     "CR": ("Crouzeix-Raviart", 1, "Discontinuous Lagrange", 0),    
@@ -21,10 +21,10 @@ elements_table = {
 #    "CD3": ("Lagrange", 1, "Discontinuous Lagrange", 1), # doesnt work     
 #    "CD4": ("Lagrange", 3, "Discontinuous Lagrange", 0), # like a normal solution, not sure     
     }
-hmin = 25
-hmax = 150
+n_min = 25
+n_max = 150
 hstep = 5
-h_ex = 200
+n_ex = 200
 
 times = {}
 u_errs = {}
@@ -64,9 +64,9 @@ def save_psi_err(name, h, psi_err):
 def save_dat_aggr(fname, times):    
     ft = open("result/dat2/%s.dat" % fname, "w")
     
-    arr_h = range(hmin, hmax+1, hstep)
+    arr_h = range(n_min, n_max+1, hstep)
     arr_n = []
-    for name in times[hmin]:
+    for name in times[n_min]:
         arr_n.append(name)
         
     ft.write("# h ")
@@ -161,24 +161,24 @@ def save_dat_slice_y(u, p, psi, name, h, mesh, y=0.5):
 
 if __name__ == "__main__":
     init_result()
-    mesh_ex = create_mesh(h_ex)
+    mesh_ex = create_mesh(n_ex)
     space_ex = create_space("TH", mesh_ex)
     (u_ex, p_ex, t_ex) = solve_cavity(mesh_ex, space_ex)
     (psi_ex) = solve_cavity_psi(mesh_ex, space_ex, u_ex)
-    save_pvd_list(u_ex, p_ex, psi_ex, "TH", h_ex)
-    save_dat(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex)
-    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.5)
-    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.4)
-    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.2)
-    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.3)
-    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.1)
-    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.5)
-    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.4)
-    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.2)
-    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.3)
-    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", h_ex, mesh_ex, 0.1)
-    h = hmin
-    while(h<=hmax):
+    save_pvd_list(u_ex, p_ex, psi_ex, "TH", n_ex)
+    save_dat(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.5)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.4)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.2)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.3)
+    save_dat_slice_x(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.1)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.5)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.4)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.2)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.3)
+    save_dat_slice_y(u_ex, p_ex, psi_ex, "TH", n_ex, mesh_ex, 0.1)
+    h = n_min
+    while(h<=n_max):
         mesh = create_mesh(h)            
         for element in elements_table:        
             space = create_space(element, mesh)            

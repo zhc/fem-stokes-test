@@ -2,10 +2,10 @@
 set term png size 600, 300
 set title ''
 set key left
-set xlabel 'h'
+set xlabel 'N'
 set ylabel 'seconds'
 
-filename(quantity)=sprintf('result_orig/dat2/%s.dat', quantity)
+filename(quantity)=sprintf('result/dat2/%s.dat', quantity)
 
 plot filename('time') u 1:2 w l t 'CR', \
 	filename('time') u 1:3 w l t 'TH', \

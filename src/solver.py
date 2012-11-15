@@ -73,4 +73,4 @@ def solve_cavity_error(u, p, psi, u_ex, p_ex, psi_ex, mesh_ex):
     p_err = assemble(Mp, mesh=mesh_ex)
     Mps = (psi_ex - psi)*(psi_ex - psi)*dx
     psi_err = assemble(Mps, mesh=mesh_ex)
-    return (v_err, p_err, psi_err)
+    return (sqrt(v_err), sqrt(p_err), sqrt(psi_err))

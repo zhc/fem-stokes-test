@@ -3,7 +3,7 @@ set term png size 600, 300
 set title ''
 
 
-filename(quantity, element, h, slice)=sprintf('result_orig/slice/%s_%s_%d_%s.dat', quantity, element, h, slice)
+filename(quantity, element, h, slice)=sprintf('result/slice/%s_%s_%d_%s.dat', quantity, element, h, slice)
 
 #set multiplot layout 2, 2
 
