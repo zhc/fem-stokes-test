@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="cavity400.png">
+   sodipodi:docname="cavity400.svg">
   <defs
      id="defs4">
     <marker
@@ -86,7 +86,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -147,26 +147,15 @@
          y="1048.9948">0</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40.23109436px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="149.69475"
-       y="684.61597"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="113.69475"
+       y="674.61597"
        id="text4806"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4808"
-         x="149.69475"
-         y="684.61597">u =1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:30.17332268px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="173.11499"
-       y="689.78845"
-       id="text4810"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4812"
-         x="173.11499"
-         y="689.78845">1</tspan></text>
+         x="113.69475"
+         y="674.61597">u(x ,x ,t)=(1,0,t)</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.68300581px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-6)"
        d="m 116.70019,693.09338 160.92789,0"
@@ -278,7 +267,7 @@
            height="104.5"
            x="274.5"
            y="152" /></flowRegion><flowPara
-         id="flowPara3221"></flowPara></flowRoot>    <text
+         id="flowPara3221" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:30.17332268px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
        x="362.74219"
@@ -299,10 +288,32 @@
            height="98"
            x="-97"
            y="159" /></flowRegion><flowPara
-         id="flowPara3282"></flowPara></flowRoot>    <path
+         id="flowPara3282" /></flowRoot>    <path
        style="fill:none;stroke:#c80000;stroke-width:4.03490353;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 40.127804,702.58823 298.024146,0"
        id="path4127"
        inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="146.61374"
+       y="680.42401"
+       id="text3031"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3033"
+         x="146.61374"
+         y="680.42401">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="174.06958"
+       y="681.1311"
+       id="text3035"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3037"
+         x="174.06958"
+         y="681.1311">2</tspan></text>
   </g>
 </svg>

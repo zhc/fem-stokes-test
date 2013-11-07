@@ -1,0 +1,10 @@
+element = triangle
+U = VectorElement("CR", element, 1)
+P = FiniteElement("DG", element, 0)
+W = U*P
+w = TrialFunction(W)
+(u, p) = split(w)
+(v, q) = TestFunctions(W)
+f = VectorConstant(element)
+a = inner(grad(u), grad(v))*dx - p*div(v)*dx + div(u)*q*dx
+L = inner(f, v)*dx
